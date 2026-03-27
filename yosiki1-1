@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>別紙様式1-1 患者の服薬状況等に係る情報提供書</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @media print {
+            .no-print { display: none; }
+            body { background-color: white; padding: 0; }
+            .form-container { border: none; box-shadow: none; width: 100%; max-width: none; margin: 0; }
+            input, textarea { border: none !important; background: transparent !important; }
+            textarea { resize: none; }
+            select { appearance: none; border: none !important; }
+        }
+        body {
+            background-color: #f3f4f6;
+            font-family: 'Noto Sans JP', sans-serif;
+            color: #333;
+        }
+        .form-container {
+            background-color: white;
+            width: 210mm;
+            min-height: 297mm;
+            margin: 20px auto;
+            padding: 20mm;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input[type="text"], input[type="number"], textarea {
+            width: 100%;
+            border-bottom: 1px solid #999;
+            padding: 2px 5px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        input[type="text"]:focus, textarea:focus {
+            border-bottom: 2px solid #2563eb;
+        }
+        .label-bold { font-weight: bold; }
+        .section-title {
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            border-bottom: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="no-print flex justify-center p-4 gap-4 sticky top-0 bg-gray-100 z-10 shadow-sm">
+        <button onclick="window.print()" class="bg-blue-600 text-white px-6 py-2 rounded shadow hover:bg-blue-700 transition flex items-center gap-2">
+            <span>印刷 / PDF保存</span>
+        </button>
+        <button onclick="downloadHTML()" class="bg-green-600 text-white px-6 py-2 rounded shadow hover:bg-green-700 transition flex items-center gap-2">
+            <span>HTMLを保存 (再編集用)</span>
+        </button>
+        <button onclick="resetForm()" class="bg-gray-200 text-gray-700 px-6 py-2 rounded shadow hover:bg-gray-300 transition">
+            入力をリセット
+        </button>
+    </div>
+
+    <div class="form-container" id="printable-area">
+        <div class="text-sm">(別紙様式 1-1)</div>
+        <h1 class="text-center text-2xl font-bold mb-8">患者の服薬状況等に係る情報提供書</h1>
+
+        <div class="grid grid-cols-2 gap-8 mb-6">
+            <div>
+                <div class="flex items-end gap-2 mb-2">
+                    <span class="label-bold whitespace-nowrap">情報提供先保険医療機関名：</span>
+                    <input type="text" class="flex-grow" id="field-medical-inst">
+                </div>
+                <div class="flex items-end gap-2">
+                    <span class="label-bold whitespace-nowrap">担当医：</span>
+                    <input type="text" class="w-1/2" id="field-doctor">
+                    <span class="whitespace-nowrap">科 御中</span>
+                </div>
+            </div>
+            <div class="text-right">
+                <div class="flex justify-end items-end gap-1 mb-2">
+                    <span>令和</span>
+                    <input type="text" class="w-12 text-center" placeholder="  "><span>年</span>
+                    <input type="text" class="w-8 text-center" placeholder="  "><span>月</span>
+                    <input type="text" class="w-8 text-center" placeholder="  "><span>日</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col items-end mb-8">
+            <div class="w-2/3">
+                <div class="flex items-start gap-2 mb-1">
+                    <span class="text-xs whitespace-nowrap mt-1">所在地・名称：</span>
+                    <textarea rows="2" class="text-sm"></textarea>
+                </div>
+                <div class="flex items-end gap-2 mb-1">
+                    <span class="text-xs whitespace-nowrap">電話：</span>
+                    <input type="text" class="text-sm">
+                    <span class="text-xs whitespace-nowrap">FAX：</span>
+                    <input type="text" class="text-sm">
+                </div>
+                <div class="flex items-end gap-2">
+                    <span class="text-xs whitespace-nowrap">保険薬剤師氏名：</span>
+                    <input type="text" class="flex-grow text-sm">
+                    <span class="border border-gray-400 rounded-full w-8 h-8 flex items-center justify-center text-[10px]">印</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 患者情報 -->
+        <div class="border border-gray-800 p-4 mb-6">
+            <div class="grid grid-cols-12 gap-y-4 items-center">
+                <div class="col-span-2 font-bold">患者氏名</div>
+                <div class="col-span-10 flex items-end">
+                    <input type="text" class="text-lg font-bold" id="field-patient-name">
+                </div>
+
+                <div class="col-span-2 font-bold">性別</div>
+                <div class="col-span-2">
+                    <label class="mr-2"><input type="radio" name="sex" value="男"> 男</label>
+                    <label><input type="radio" name="sex" value="女"> 女</label>
+                </div>
+                <div class="col-span-2 font-bold text-right pr-4">生年月日</div>
+                <div class="col-span-6 flex items-end gap-1">
+                    <select class="border-b border-gray-400 bg-transparent">
+                        <option>昭和</option>
+                        <option>平成</option>
+                        <option selected>令和</option>
+                    </select>
+                    <input type="text" class="w-8 text-center"><span>年</span>
+                    <input type="text" class="w-6 text-center"><span>月</span>
+                    <input type="text" class="w-6 text-center"><span>日生</span>
+                    <span class="ml-4">（</span><input type="text" class="w-8 text-center"><span>歳）</span>
+                </div>
+
+                <div class="col-span-2 font-bold">住所</div>
+                <div class="col-span-10">
+                    <input type="text">
+                </div>
+
+                <div class="col-span-2 font-bold">電話番号</div>
+                <div class="col-span-10">
+                    <input type="text" class="w-1/2">
+                </div>
+            </div>
+        </div>
+
+        <p class="mb-4">以下のとおり、情報提供いたします。</p>
+
+        <div class="mb-6">
+            <div class="font-bold flex items-center gap-2 mb-1">
+                ■ 情報提供の概要：
+                <span class="font-normal text-sm">令和</span>
+                <input type="text" class="w-10 text-center text-sm"><span>年</span>
+                <input type="text" class="w-6 text-center text-sm"><span>月</span>
+                <input type="text" class="w-6 text-center text-sm"><span>日</span>
+            </div>
+            <textarea rows="2" class="w-full border p-2 text-sm leading-relaxed" placeholder="概要を入力してください"></textarea>
+        </div>
+
+        <div class="space-y-4">
+            <div>
+                <div class="section-title">1. 処方薬の情報</div>
+                <div class="text-xs mb-1">薬剤名等：</div>
+                <textarea rows="3" class="w-full border p-2 text-sm"></textarea>
+            </div>
+
+            <div>
+                <div class="section-title">2. 併用薬剤等（要指導・一般用医薬品、医薬部外品、いわゆる健康食品を含む。）の情報</div>
+                <div class="text-xs mb-1">薬剤名等：</div>
+                <textarea rows="2" class="w-full border p-2 text-sm"></textarea>
+            </div>
+
+            <div>
+                <div class="section-title">3. 処方薬剤の服用状況（アドヒアランス及び残薬等）及びそれに対する指導に関する情報</div>
+                <textarea rows="3" class="w-full border p-2 text-sm"></textarea>
+            </div>
+
+            <div>
+                <div class="section-title">4. 患者、家族又は介護者からの情報（副作用のおそれがある症状及び薬剤服用に係る意向等）</div>
+                <textarea rows="3" class="w-full border p-2 text-sm"></textarea>
+            </div>
+
+            <div>
+                <div class="section-title">5. 薬剤に関する提案</div>
+                <textarea rows="3" class="w-full border p-2 text-sm"></textarea>
+            </div>
+
+            <div>
+                <div class="section-title">6. その他</div>
+                <textarea rows="2" class="w-full border p-2 text-sm"></textarea>
+            </div>
+        </div>
+
+        <div class="mt-8 text-xs text-gray-600 border-t pt-2">
+            <p>【記載上の注意】</p>
+            <ol class="list-decimal ml-4">
+                <li>必要がある場合には、続紙に記載して添付すること。</li>
+                <li>わかりやすく記入すること。</li>
+                <li>必要な場合には、手帳又は処方箋等の写しを添付すること。</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        function resetForm() {
+            if(confirm('入力をすべて消去してもよろしいですか？')) {
+                const inputs = document.querySelectorAll('input, textarea');
+                inputs.forEach(input => {
+                    if(input.type === 'radio' || input.type === 'checkbox') {
+                        input.checked = false;
+                    } else {
+                        input.value = '';
+                    }
+                });
+            }
+        }
+
+        function downloadHTML() {
+            // 現在の入力値を属性としてHTMLに反映させる（保存後に再現するため）
+            const inputs = document.querySelectorAll('input[type="text"], textarea');
+            inputs.forEach(el => {
+                el.setAttribute('value', el.value);
+                if (el.tagName === 'TEXTAREA') {
+                    el.textContent = el.value;
+                }
+            });
+
+            const radios = document.querySelectorAll('input[type="radio"]');
+            radios.forEach(el => {
+                if (el.checked) {
+                    el.setAttribute('checked', 'checked');
+                } else {
+                    el.removeAttribute('checked');
+                }
+            });
+
+            const selects = document.querySelectorAll('select');
+            selects.forEach(el => {
+                const options = el.querySelectorAll('option');
+                options.forEach(opt => {
+                    if (opt.value === el.value) {
+                        opt.setAttribute('selected', 'selected');
+                    } else {
+                        opt.removeAttribute('selected');
+                    }
+                });
+            });
+
+            const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            const patientName = document.getElementById('field-patient-name').value || '患者様';
+            a.href = url;
+            a.download = `情報提供書_${patientName}.html`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
