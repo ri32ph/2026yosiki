@@ -22,14 +22,14 @@
             background-color: #f1f5f9;
             font-family: 'Noto Sans JP', sans-serif;
             color: #000;
-            line-height: 1.5;
+            line-height: 1.7;
         }
         .form-container {
             background-color: white;
             width: 210mm;
             min-height: 297mm;
             margin: 30px auto;
-            padding: 15mm 20mm;
+            padding: 20mm 20mm;
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
         }
         input[type="text"], textarea {
@@ -38,8 +38,7 @@
         }
         .border-b-dotted { border-bottom: 1px dotted #666; }
         .border-b-solid { border-bottom: 1px solid #000; }
-        .section-title { font-weight: bold; margin-bottom: 0.25rem; }
-        .input-date { width: 2.5rem; text-align: center; }
+        .input-date { width: 2.2rem; text-align: center; margin: 0 2px; }
         
         /* Modal for Settings */
         #settings-modal {
@@ -65,25 +64,25 @@
     <!-- 薬局情報設定モーダル -->
     <div id="settings-modal" class="no-print">
         <div class="bg-white p-6 rounded-lg shadow-xl w-[500px] border">
-            <h2 class="text-lg font-bold mb-4">薬局情報のデフォルト設定</h2>
+            <h2 class="text-lg font-bold mb-4 border-b pb-2">薬局情報のデフォルト設定</h2>
             <div class="space-y-4">
                 <div>
                     <label class="block text-sm font-bold mb-1">所在地及び名称</label>
-                    <textarea id="set-pharmacy-info" class="w-full border p-2 text-sm" rows="2"></textarea>
+                    <textarea id="set-pharmacy-info" class="w-full border p-2 text-sm rounded" rows="2" placeholder="例：東京都◯◯区... ○○薬局"></textarea>
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-bold mb-1">電話番号</label>
-                        <input type="text" id="set-pharmacy-tel" class="w-full border p-2 text-sm">
+                        <input type="text" id="set-pharmacy-tel" class="w-full border p-2 text-sm rounded">
                     </div>
                     <div>
                         <label class="block text-sm font-bold mb-1">FAX番号</label>
-                        <input type="text" id="set-pharmacy-fax" class="w-full border p-2 text-sm">
+                        <input type="text" id="set-pharmacy-fax" class="w-full border p-2 text-sm rounded">
                     </div>
                 </div>
                 <div>
                     <label class="block text-sm font-bold mb-1">保険薬剤師氏名</label>
-                    <input type="text" id="set-pharmacy-pharmacist" class="w-full border p-2 text-sm">
+                    <input type="text" id="set-pharmacy-pharmacist" class="w-full border p-2 text-sm rounded">
                 </div>
             </div>
             <div class="mt-6 flex justify-end gap-2">
@@ -95,23 +94,23 @@
 
     <div class="form-container" id="printable-area">
         <div class="text-sm">(別紙様式 1-1)</div>
-        <h1 class="text-center text-xl font-bold mt-2 mb-8 underline underline-offset-8">患者の服薬状況等に係る情報提供書</h1>
+        <h1 class="text-center text-xl font-bold mt-4 mb-10 tracking-[0.2em] underline underline-offset-[12px]">患者の服薬状況等に係る情報提供書</h1>
 
-        <!-- 宛先と日付 -->
-        <div class="grid grid-cols-12 mb-2">
-            <div class="col-span-8">
-                <div class="flex items-end mb-4">
+        <!-- 上部：医療機関と日付 -->
+        <div class="flex justify-between items-start mb-4">
+            <div class="w-3/5 space-y-4">
+                <div class="flex items-end">
                     <span class="whitespace-nowrap">情報提供先保険医療機関名</span>
                     <input type="text" class="flex-grow mx-2 border-b-dotted" id="field-medical-inst">
                 </div>
                 <div class="flex items-end">
                     <span class="whitespace-nowrap">担当医</span>
                     <input type="text" class="w-48 mx-2 border-b-dotted text-center" id="field-doctor">
-                    <span>科　　殿</span>
+                    <span class="whitespace-nowrap">科　　殿</span>
                 </div>
             </div>
-            <div class="col-span-4 text-right">
-                <div class="flex justify-end items-end gap-1 mb-8">
+            <div class="w-2/5 flex flex-col items-end">
+                <div class="flex items-end justify-end mb-8 whitespace-nowrap">
                     <span>令和</span>
                     <input type="text" class="input-date border-b-dotted"><span>年</span>
                     <input type="text" class="input-date border-b-dotted"><span>月</span>
@@ -120,30 +119,30 @@
             </div>
         </div>
 
-        <!-- 薬局情報 (右寄せ) -->
-        <div class="flex justify-end mb-6 text-sm">
-            <div class="w-2/3 border-l pl-4 py-1">
-                <div class="flex items-start mb-2">
+        <!-- 中部：薬局情報 -->
+        <div class="flex justify-end mb-6">
+            <div class="w-3/4 border-l border-gray-300 pl-4 py-1 space-y-1 text-sm">
+                <div class="flex items-start">
                     <span class="whitespace-nowrap">情報提供元保険薬局の所在地及び名称：</span>
-                    <textarea rows="2" class="flex-grow ml-1 border-b-dotted leading-relaxed" id="pharmacy-info-display"></textarea>
+                    <textarea rows="2" class="flex-grow ml-1 border-b-dotted leading-relaxed overflow-hidden resize-none" id="pharmacy-info-display"></textarea>
                 </div>
-                <div class="flex items-end mb-2">
+                <div class="flex items-end">
                     <span class="whitespace-nowrap">電　　話</span>
-                    <input type="text" class="w-1/3 mx-2 border-b-dotted" id="pharmacy-tel-display">
-                    <span class="whitespace-nowrap">(FAX)</span>
-                    <input type="text" class="w-1/3 mx-2 border-b-dotted" id="pharmacy-fax-display">
+                    <input type="text" class="w-[30%] mx-2 border-b-dotted" id="pharmacy-tel-display">
+                    <span class="whitespace-nowrap"> (FAX)</span>
+                    <input type="text" class="w-[30%] mx-2 border-b-dotted" id="pharmacy-fax-display">
                 </div>
                 <div class="flex items-end">
                     <span class="whitespace-nowrap">保険薬剤師氏名</span>
                     <input type="text" class="flex-grow mx-2 border-b-dotted" id="pharmacy-pharmacist-display">
-                    <div class="border border-black rounded-full w-8 h-8 flex items-center justify-center text-[10px] flex-shrink-0">印</div>
+                    <div class="border border-black rounded-full w-8 h-8 flex items-center justify-center text-[10px] flex-shrink-0 ml-1">印</div>
                 </div>
             </div>
         </div>
 
-        <!-- 患者情報テーブル風 -->
-        <div class="border border-black p-3 mb-6 section-border">
-            <div class="grid grid-cols-12 gap-y-4 items-center">
+        <!-- 患者基本情報 -->
+        <div class="border border-black p-4 mb-6 section-border leading-loose">
+            <div class="grid grid-cols-12 gap-y-3 items-center">
                 <div class="col-span-2">患者氏名</div>
                 <div class="col-span-10 flex items-end">
                     <input type="text" class="text-lg font-bold flex-grow border-b-dotted" id="field-patient-name">
@@ -151,12 +150,14 @@
 
                 <div class="col-span-2">性別</div>
                 <div class="col-span-3">
-                    <label class="mr-4"><input type="radio" name="sex" value="男"> 男</label>
-                    <label><input type="radio" name="sex" value="女"> 女</label>
+                    <label class="mr-6 inline-flex items-center cursor-pointer"><input type="radio" name="sex" value="男" class="mr-1"> 男</label>
+                    <label class="inline-flex items-center cursor-pointer"><input type="radio" name="sex" value="女" class="mr-1"> 女</label>
                 </div>
                 <div class="col-span-2 text-right pr-4">生年月日</div>
-                <div class="col-span-5 flex items-end">
-                    <select class="bg-transparent border-b-dotted mr-1">
+                <div class="col-span-5 flex items-end whitespace-nowrap">
+                    <select class="bg-transparent border-b-dotted mr-1 outline-none">
+                        <option>明治</option>
+                        <option>大正</option>
                         <option>昭和</option>
                         <option>平成</option>
                         <option selected>令和</option>
@@ -181,55 +182,58 @@
 
         <p class="mb-4">以下のとおり、情報提供いたします。</p>
 
-        <!-- 情報提供内容 -->
-        <div class="space-y-6">
-            <div>
-                <div class="flex items-center gap-1 font-bold">
-                    情報提供の概要：
-                    <span>令和</span>
-                    <input type="text" class="input-date border-b-dotted"><span>年</span>
-                    <input type="text" class="input-date border-b-dotted"><span>月</span>
-                    <input type="text" class="input-date border-b-dotted"><span>日</span>
+        <!-- 提供内容セクション -->
+        <div class="space-y-4">
+            <div class="border-t border-black pt-2">
+                <div class="flex items-center font-bold mb-1">
+                    <span class="mr-2">情報提供の概要：</span>
+                    <div class="flex items-center ml-auto font-normal text-sm">
+                        <span>令和</span>
+                        <input type="text" class="input-date border-b-dotted"><span>年</span>
+                        <input type="text" class="input-date border-b-dotted"><span>月</span>
+                        <input type="text" class="input-date border-b-dotted"><span>日</span>
+                    </div>
                 </div>
-                <textarea rows="2" class="w-full border border-gray-300 p-2 mt-1 text-sm"></textarea>
+                <textarea rows="2" class="w-full border border-gray-200 p-2 text-sm leading-relaxed" placeholder="提供する情報の主旨を記入"></textarea>
             </div>
 
-            <div class="border-t pt-2">
-                <div class="section-title">1 処方薬の情報</div>
-                <div class="text-xs mb-1">薬剤名等：</div>
-                <textarea rows="3" class="w-full border border-gray-300 p-2 text-sm"></textarea>
-            </div>
-
-            <div class="border-t pt-2">
-                <div class="section-title">2 併用薬剤等(要指導・一般用医薬品、医薬部外品、いわゆる健康食品を含む。)の情報</div>
+            <div class="border-t border-black pt-2">
+                <div class="font-bold mb-1">1 処方薬の情報</div>
                 <div class="text-xs mb-1 ml-4">薬剤名等：</div>
-                <textarea rows="2" class="w-full border border-gray-300 p-2 text-sm"></textarea>
+                <textarea rows="3" class="w-full border border-gray-200 p-2 text-sm"></textarea>
             </div>
 
-            <div class="border-t pt-2">
-                <div class="section-title">3 処方薬剤の服用状況(アドヒアランス及び残薬等)及びそれに対する指導に関する情報</div>
-                <textarea rows="4" class="w-full border border-gray-300 p-2 text-sm"></textarea>
+            <div class="border-t border-black pt-2">
+                <div class="font-bold mb-1 text-[0.95rem]">2 併用薬剤等(要指導・一般用医薬品、医薬部外品、いわゆる健康食品を含む。)の情報</div>
+                <div class="text-xs mb-1 ml-4">薬剤名等：</div>
+                <textarea rows="2" class="w-full border border-gray-200 p-2 text-sm"></textarea>
             </div>
 
-            <div class="border-t pt-2">
-                <div class="section-title">4 患者、家族又は介護者からの情報 (副作用のおそれがある症状及び薬剤服用に係る意向等)</div>
-                <textarea rows="4" class="w-full border border-gray-300 p-2 text-sm"></textarea>
+            <div class="border-t border-black pt-2">
+                <div class="font-bold mb-1">3 処方薬剤の服用状況(アドヒアランス及び残薬等)及びそれに対する指導に関する情報</div>
+                <textarea rows="4" class="w-full border border-gray-200 p-2 text-sm"></textarea>
             </div>
 
-            <div class="border-t pt-2">
-                <div class="section-title">5 薬剤に関する提案</div>
-                <textarea rows="3" class="w-full border border-gray-300 p-2 text-sm"></textarea>
+            <div class="border-t border-black pt-2">
+                <div class="font-bold text-[0.93rem] whitespace-nowrap overflow-hidden">4 患者、家族又は介護者からの情報 (副作用のおそれがある症状及び薬剤服用に係る意向等)</div>
+                <textarea rows="4" class="w-full border border-gray-200 p-2 text-sm"></textarea>
             </div>
 
-            <div class="border-t pt-2">
-                <div class="section-title">6 その他</div>
-                <textarea rows="2" class="w-full border border-gray-300 p-2 text-sm"></textarea>
+            <div class="border-t border-black pt-2">
+                <div class="font-bold mb-1">5 薬剤に関する提案</div>
+                <textarea rows="3" class="w-full border border-gray-200 p-2 text-sm"></textarea>
+            </div>
+
+            <div class="border-t border-black pt-2 mb-4">
+                <div class="font-bold mb-1">6 その他</div>
+                <textarea rows="2" class="w-full border border-gray-200 p-2 text-sm"></textarea>
             </div>
         </div>
 
-        <div class="mt-8 text-[10px] leading-relaxed text-gray-700">
-            <p>[記載上の注意]</p>
-            <ol class="list-decimal ml-4">
+        <!-- 注意書き -->
+        <div class="mt-8 text-[10px] leading-loose text-gray-700">
+            <p class="font-bold mb-1">[記載上の注意]</p>
+            <ol class="list-decimal ml-5">
                 <li>必要がある場合には、続紙に記載して添付すること。</li>
                 <li>わかりやすく記入すること。</li>
                 <li>必要な場合には、手帳又は処方箋等の写しを添付すること。</li>
@@ -238,19 +242,12 @@
     </div>
 
     <script>
+        // ロード時に保存データを読み込み
         window.onload = function() {
             const saved = localStorage.getItem('pharmacySettings');
             if (saved) {
                 const config = JSON.parse(saved);
-                document.getElementById('pharmacy-info-display').value = config.info || '';
-                document.getElementById('pharmacy-tel-display').value = config.tel || '';
-                document.getElementById('pharmacy-fax-display').value = config.fax || '';
-                document.getElementById('pharmacy-pharmacist-display').value = config.pharmacist || '';
-                
-                document.getElementById('set-pharmacy-info').value = config.info || '';
-                document.getElementById('set-pharmacy-tel').value = config.tel || '';
-                document.getElementById('set-pharmacy-fax').value = config.fax || '';
-                document.getElementById('set-pharmacy-pharmacist').value = config.pharmacist || '';
+                applyPharmacyInfo(config);
             }
         };
 
@@ -265,15 +262,25 @@
                 pharmacist: document.getElementById('set-pharmacy-pharmacist').value
             };
             localStorage.setItem('pharmacySettings', JSON.stringify(config));
-            document.getElementById('pharmacy-info-display').value = config.info;
-            document.getElementById('pharmacy-tel-display').value = config.tel;
-            document.getElementById('pharmacy-fax-display').value = config.fax;
-            document.getElementById('pharmacy-pharmacist-display').value = config.pharmacist;
+            applyPharmacyInfo(config);
             closeSettings();
         }
 
+        function applyPharmacyInfo(config) {
+            document.getElementById('pharmacy-info-display').value = config.info || '';
+            document.getElementById('pharmacy-tel-display').value = config.tel || '';
+            document.getElementById('pharmacy-fax-display').value = config.fax || '';
+            document.getElementById('pharmacy-pharmacist-display').value = config.pharmacist || '';
+            
+            // モーダル側も同期
+            document.getElementById('set-pharmacy-info').value = config.info || '';
+            document.getElementById('set-pharmacy-tel').value = config.tel || '';
+            document.getElementById('set-pharmacy-fax').value = config.fax || '';
+            document.getElementById('set-pharmacy-pharmacist').value = config.pharmacist || '';
+        }
+
         function resetForm() {
-            if(confirm('薬局情報以外の入力を消去しますか？')) {
+            if(confirm('薬局情報以外の入力内容をクリアしますか？')) {
                 const area = document.getElementById('printable-area');
                 area.querySelectorAll('input:not([id*="pharmacy"]), textarea:not([id*="pharmacy"])').forEach(el => {
                     if(el.type === 'radio') el.checked = false;
