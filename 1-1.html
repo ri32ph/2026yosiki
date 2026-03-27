@@ -2,59 +2,119 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>別紙様式1-1：入力画面</title>
     <style>
         body {
-            background-color: #525659; /* PDFビューア風の背景色 */
+            background-color: #525659;
             margin: 0;
             display: flex;
             justify-content: center;
             padding: 20px;
+            font-family: sans-serif;
         }
 
         .page {
             width: 210mm;
-            height: 297mm; /* A4正寸 */
+            height: 297mm;
             background-color: white;
             position: relative;
-            
-            /* 【修正ポイント】パスの書き方 */
-            /* 画像形式がpngなら .png に書き換えてください */
-            background-image: url('./Reference/page1.jpg'); 
-            background-size: contain;
+            background-image: url('Reference/page1.jpg');
+            background-size: 100% 100%;
             background-repeat: no-repeat;
-            background-position: center;
-            
-            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
         }
 
-        /* 入力欄が見えやすいように一時的に背景色を付けています */
+        /* 入力欄の共通スタイル */
         .field {
             position: absolute;
-            border: 1px solid rgba(255, 0, 0, 0.3); /* 位置調整用の赤い枠 */
+            border: 1px solid rgba(0, 102, 255, 0.2); /* 位置確認用。完成時に border: none; へ */
             background: rgba(255, 255, 255, 0.4);
             box-sizing: border-box;
+            padding: 0 5px;
             font-size: 14px;
+            outline: none;
         }
 
-        /* 座標（微調整用） */
-        .medical-inst { top: 7.2%; left: 10%; width: 40%; height: 20px; }
-        .patient-name  { top: 23.5%; left: 20%; width: 35%; height: 30px; font-size: 18px; }
-        /* ...他の項目も同様... */
+        .field:focus {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #0066ff;
+        }
 
+        /* --- 座標指定 --- */
+        
+        /* 1. 宛先・薬局セクション */
+        .hosp-name { top: 15.3%; left: 24%; width: 28%; height: 2.2%; }
+        .doc-name  { top: 17.6%; left: 16%; width: 13%; height: 2.2%; }
+        .dept-name { top: 17.6%; left: 32%; width: 8%; height: 2.2%; }
+        
+        .date-y { top: 19.5%; left: 74.5%; width: 4%; height: 2%; }
+        .date-m { top: 19.5%; left: 81%; width: 3%; height: 2%; }
+        .date-d { top: 19.5%; left: 86.5%; width: 3%; height: 2%; }
+
+        .pharm-loc  { top: 21.3%; left: 45%; width: 45%; height: 3.5%; }
+        .pharm-tel  { top: 23%; left: 46%; width: 15%; height: 2%; }
+        .pharm-fax  { top: 24.8%; left: 46%; width: 15%; height: 2%; }
+        .pharm-name { top: 26.5%; left: 50%; width: 35%; height: 2.2%; }
+
+        /* 2. 患者情報セクション */
+        .pt-name  { top: 28.5%; left: 17%; width: 35%; height: 2.5%; font-size: 18px; }
+        .pt-sex   { top: 30.2%; left: 16%; width: 5%; height: 2%; }
+        .pt-birth-y { top: 30.2%; left: 33.5%; width: 4%; height: 2%; }
+        .pt-birth-m { top: 30.2%; left: 40%; width: 3%; height: 2%; }
+        .pt-birth-d { top: 30.2%; left: 45.5%; width: 3%; height: 2%; }
+        .pt-age   { top: 30.2%; left: 53%; width: 3%; height: 2%; }
+        .pt-addr  { top: 32%; left: 14%; width: 75%; height: 2.2%; }
+        .pt-tel   { top: 33.8%; left: 17%; width: 30%; height: 2.2%; }
+
+        /* 3. 情報提供内容セクション */
+        .summary-date { top: 37.5%; left: 11.5%; width: 15%; height: 2%; }
+        .summary-txt  { top: 39%; left: 11.5%; width: 77.5%; height: 4.5%; }
+
+        .info-1 { top: 45.5%; left: 13%; width: 76%; height: 4.5%; }
+        .info-2 { top: 52.5%; left: 13%; width: 76%; height: 5%; }
+        .info-3 { top: 60.5%; left: 13%; width: 76%; height: 5%; }
+        .info-4 { top: 68.5%; left: 13%; width: 76%; height: 5.5%; }
+        .info-5 { top: 76.5%; left: 13%; width: 76%; height: 5.5%; }
+        .info-6 { top: 84.5%; left: 13%; width: 76%; height: 7.5%; }
+
+        @media print {
+            body { background: none; padding: 0; }
+            .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; }
+            .field { border: none; background: transparent; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="page">
-        <div style="position:absolute; color:red; top:50%; left:35%; z-index:-1;">
-            画像が読み込めていない場合は<br>
-            Reference/page1.jpg があるか確認してください
-        </div>
+<div class="page">
+    <input type="text" class="field hosp-name">
+    <input type="text" class="field doc-name">
+    <input type="text" class="field dept-name">
+    <input type="text" class="field date-y">
+    <input type="text" class="field date-m">
+    <input type="text" class="field date-d">
+    <textarea class="field pharm-loc"></textarea>
+    <input type="text" class="field pharm-tel">
+    <input type="text" class="field pharm-fax">
+    <input type="text" class="field pharm-name">
 
-        <input type="text" class="field medical-inst" placeholder="医療機関名">
-        <input type="text" class="field patient-name" placeholder="患者氏名">
-    </div>
+    <input type="text" class="field pt-name">
+    <input type="text" class="field pt-sex">
+    <input type="text" class="field pt-birth-y">
+    <input type="text" class="field pt-birth-m">
+    <input type="text" class="field pt-birth-d">
+    <input type="text" class="field pt-age">
+    <input type="text" class="field pt-addr">
+    <input type="text" class="field pt-tel">
+
+    <input type="text" class="field summary-date">
+    <textarea class="field summary-txt"></textarea>
+    <textarea class="field info-1"></textarea>
+    <textarea class="field info-2"></textarea>
+    <textarea class="field info-3"></textarea>
+    <textarea class="field info-4"></textarea>
+    <textarea class="field info-5"></textarea>
+    <textarea class="field info-6"></textarea>
+</div>
 
 </body>
 </html>
