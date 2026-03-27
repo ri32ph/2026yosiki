@@ -59,7 +59,7 @@
             height: var(--paper-height);
             margin: 25px auto;
             background: white;
-            padding: 18mm 18mm;
+            padding: 15mm 18mm; /* 上下余白を微減 */
             box-sizing: border-box;
             box-shadow: 0 0 15px rgba(0,0,0,0.15);
             position: relative;
@@ -78,7 +78,7 @@
             text-align: center;
             font-size: 19pt;
             font-weight: 700;
-            margin: 0 0 8mm 0;
+            margin: 0 0 6mm 0; /* マージンを削減 */
             letter-spacing: 0.1em;
             text-decoration: underline;
             text-underline-offset: 5px;
@@ -88,7 +88,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 5mm;
-            margin-bottom: 6mm;
+            margin-bottom: 4mm; /* マージンを削減 */
         }
 
         .dest-info {
@@ -105,21 +105,21 @@
 
         .provider-info-box {
             border: 1px solid #000;
-            padding: 8pt;
-            font-size: 9.5pt;
-            line-height: 1.6;
+            padding: 6pt; /* パディングを削減 */
+            font-size: 9pt; /* フォントサイズを微減 */
+            line-height: 1.5;
         }
 
         .provider-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 4pt;
+            margin-top: 3pt;
         }
 
         .stamp-circle {
-            width: 48px;
-            height: 48px;
+            width: 44px; /* サイズを縮小 */
+            height: 44px;
             border: 1px solid #999;
             border-radius: 50%;
             display: flex;
@@ -127,26 +127,26 @@
             justify-content: center;
             font-size: 8pt;
             color: #999;
-            margin-left: 10px;
+            margin-left: 8px;
         }
 
-        /* 患者情報テーブル */
+        /* 患者情報テーブル - 高さの縮小 */
         .table-patient {
             width: 100%;
             border-collapse: collapse;
             border: 1.5px solid #000;
-            margin-bottom: 6mm;
+            margin-bottom: 4mm;
             table-layout: fixed;
         }
 
         .table-patient th, .table-patient td {
             border: 1px solid #000;
-            padding: 8pt;
-            height: 32pt;
+            padding: 4pt 8pt; /* 上下パディングを大幅削減 */
+            height: 24pt; /* 高さを縮小 */
         }
 
         .table-patient th {
-            background-color: #ffffff; /* 白色に変更 */
+            background-color: #ffffff;
             font-weight: 500;
             text-align: center;
             width: 80px;
@@ -154,7 +154,7 @@
         }
 
         .patient-name-cell {
-            font-size: 14pt;
+            font-size: 13pt; /* フォントサイズを微減 */
             font-weight: 500;
         }
 
@@ -168,14 +168,14 @@
 
         .table-main td {
             border: 1px solid #000;
-            padding: 6pt 10pt;
+            padding: 4pt 10pt; /* 上下パディングを削減 */
             vertical-align: top;
         }
 
         .num-col {
             width: 28px;
             text-align: center;
-            background-color: #ffffff; /* 塗りつぶしを白に変更 */
+            background-color: #ffffff;
             font-weight: 700;
             font-size: 10pt;
             vertical-align: middle !important;
@@ -183,23 +183,23 @@
 
         .content-label {
             font-weight: 700;
-            font-size: 9.5pt;
+            font-size: 9pt;
             display: block;
-            margin-bottom: 3pt;
+            margin-bottom: 2pt;
         }
 
         .editable-content {
-            min-height: 52px;
+            min-height: 44px; /* 入力エリアの最小高さを縮小 */
             font-size: 10pt;
-            line-height: 1.5;
+            line-height: 1.4;
             outline: none;
             word-break: break-all;
         }
 
         .note-section {
-            margin-top: 5mm;
-            font-size: 8.5pt;
-            line-height: 1.4;
+            margin-top: 3mm;
+            font-size: 8pt; /* フォントサイズを微減 */
+            line-height: 1.3;
             color: #555;
         }
 
@@ -244,7 +244,7 @@
         <div class="top-grid">
             <div class="dest-info">
                 情報提供先保険医療機関名<br>
-                <div style="margin-top: 8pt;">
+                <div style="margin-top: 5pt;">
                     <span class="editable field" contenteditable="true">◯◯総合病院</span> 御中<br>
                     <span class="editable" contenteditable="true" style="border-bottom: 1px solid #000; min-width: 80px; display: inline-block;">内</span> 科　
                     <span class="editable" contenteditable="true" style="border-bottom: 1px solid #000; min-width: 100px; display: inline-block;">山田 太郎</span> 先生 殿
@@ -252,15 +252,15 @@
             </div>
             <div class="provider-info-box">
                 <div>令和 <span class="editable" contenteditable="true">　</span> 年 <span class="editable" contenteditable="true">　</span> 月 <span class="editable" contenteditable="true">　</span> 日</div>
-                <div style="margin-top: 5pt; font-size: 8.5pt;">情報提供元保険薬局の所在地及び名称</div>
-                <div class="editable" contenteditable="true" style="min-height: 2.8em;">東京都◯◯区△△町 1-2-3<br>ハッピー調剤薬局</div>
-                <div style="margin-top: 3pt;">
+                <div style="margin-top: 3pt; font-size: 8pt;">情報提供元保険薬局の所在地及び名称</div>
+                <div class="editable" contenteditable="true" style="min-height: 2.5em;">東京都◯◯区△△町 1-2-3<br>ハッピー調剤薬局</div>
+                <div style="margin-top: 2pt;">
                     電話：<span class="editable" contenteditable="true" style="min-width: 100px; display: inline-block;">03-1234-5678</span><br>
                     (FAX)：<span class="editable" contenteditable="true" style="min-width: 100px; display: inline-block;">03-1234-5679</span>
                 </div>
                 <div class="provider-row">
                     <div>
-                        薬剤師氏名：<span class="editable" contenteditable="true" style="font-size: 11pt; border-bottom: 1px solid #000; min-width: 120px; display: inline-block;">薬局 花子</span>
+                        薬剤師氏名：<span class="editable" contenteditable="true" style="font-size: 10pt; border-bottom: 1px solid #000; min-width: 120px; display: inline-block;">薬局 花子</span>
                     </div>
                     <div class="stamp-circle">印</div>
                 </div>
@@ -271,31 +271,31 @@
             <tr>
                 <th>患者氏名</th>
                 <td class="patient-name-cell"><span class="editable" contenteditable="true">厚生 太郎</span></td>
-                <td style="width: 140px; font-size: 9.5pt; line-height: 1.8;">
+                <td style="width: 140px; font-size: 9pt; line-height: 1.5;">
                     性別： <span class="editable" contenteditable="true">男</span> ・ <span class="editable" contenteditable="true">女</span><br>
                     <span class="editable" contenteditable="true">　</span> 歳
                 </td>
             </tr>
             <tr>
                 <th>生年月日</th>
-                <td colspan="2" style="font-size: 10pt;">
+                <td colspan="2" style="font-size: 9.5pt;">
                     <span class="editable" contenteditable="true">昭和・平成</span> <span class="editable" contenteditable="true">　</span> 年 <span class="editable" contenteditable="true">　</span> 月 <span class="editable" contenteditable="true">　</span> 日生
                 </td>
             </tr>
             <tr>
                 <th>住所</th>
-                <td colspan="2"><span class="editable" contenteditable="true" style="width: 100%; display: inline-block;">東京都◯◯区...</span></td>
+                <td colspan="2" style="font-size: 9.5pt;"><span class="editable" contenteditable="true" style="width: 100%; display: inline-block;">東京都◯◯区...</span></td>
             </tr>
             <tr>
                 <th>電話番号</th>
-                <td colspan="2"><span class="editable" contenteditable="true">090-0000-0000</span></td>
+                <td colspan="2" style="font-size: 9.5pt;"><span class="editable" contenteditable="true">090-0000-0000</span></td>
             </tr>
         </table>
 
-        <div style="margin-bottom: 10pt; font-size: 10.5pt; display: flex; align-items: baseline; gap: 10px;">
+        <div style="margin-bottom: 6pt; font-size: 10pt; display: flex; align-items: baseline; gap: 10px;">
             <span>以下のとおり、情報提供いたします。</span>
         </div>
-        <div style="margin-bottom: 15pt; font-size: 10pt; border-bottom: 1px solid #ccc; padding-bottom: 5px;">
+        <div style="margin-bottom: 10pt; font-size: 9.5pt; border-bottom: 1px solid #ccc; padding-bottom: 3px;">
             情報提供の概要：<span class="editable" contenteditable="true" style="min-width: 300px; display: inline-block;">服薬状況の改善および副作用のモニタリング報告について</span>
             <span style="float: right;">(令和 <span class="editable" contenteditable="true">　</span> 年 <span class="editable" contenteditable="true">　</span> 月 <span class="editable" contenteditable="true">　</span> 日)</span>
         </div>
@@ -318,7 +318,7 @@
             <tr>
                 <td class="num-col">3</td>
                 <td>
-                    <span class="content-label">処方薬剤의 服用状況（アドヒアランス及び残薬等）及びそれに対する指導に関する情報</span>
+                    <span class="content-label">処方薬剤の服用状況（アドヒアランス及び残薬等）及びそれに対する指導に関する情報</span>
                     <div class="editable-content editable" contenteditable="true"></div>
                 </td>
             </tr>
@@ -347,9 +347,7 @@
 
         <div class="note-section">
             [記載上の注意]<br>
-            1. 必要がある場合には、続紙に記載して添付すること。<br>
-            2. わかりやすく記入すること。<br>
-            3. 必要な場合には、手帳又は処方箋等の写しを添付すること。
+            1. 必要がある場合には、続紙に記載して添付すること。 2. わかりやすく記入すること。 3. 必要な場合には、手帳又は処方箋等の写しを添付すること。
         </div>
     </div>
 
